@@ -1,0 +1,8 @@
+<div class="row pokemon-item align-items-center" *ngIf="pokemon">
+    <div class="col-9">
+        {{pokemon.name}} - {{pokemon.gender}}
+    </div>
+    <div class="col-3">
+        <button class="btn btn-danger" (click)="onDeletePokemon()">Supprimer</button>
+    </div>
+</div>

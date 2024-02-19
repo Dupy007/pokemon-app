@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Pokemon, PokemonService } from './services/pokemon-service.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title = 'pokemon-app';
+  currentPokemonName="";
+  pokemons:Pokemon[]=this.pokemonService.pokemons;
+
+  constructor(private pokemonService:PokemonService){}
+  onAddPokemon(){
+    this.pokemonService.addPokemon(this.currentPokemonName);
+  }
+  onDeletePokemon(index:number){
+    this.pokemonService.deletePokemon(index)
+  }
 }
