@@ -1,20 +1,16 @@
 import { Component } from '@angular/core';
-import { Pokemon, PokemonService } from './services/pokemon-service.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  currentPokemonName="";
-  pokemons:Pokemon[]=this.pokemonService.pokemons;
+  tabs = ['Pokémons',"Login","register"];
+  activeTabIndex = 0;
 
-  constructor(private pokemonService:PokemonService){}
-  onAddPokemon(){
-    this.pokemonService.addPokemon(this.currentPokemonName);
-  }
-  onDeletePokemon(index:number){
-    this.pokemonService.deletePokemon(index)
+  selectTab(index: number) {
+    this.activeTabIndex = index;
   }
 }
+

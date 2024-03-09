@@ -1,14 +1,15 @@
-<div class="container mt-5">
-  <h1 class="mb-3"></h1>
-  <div class="row mb-3">
-    <div class="col-9">
-      <input type="text" class="form-control" [(ngModel)]="currentPokemonName" name="name">
-    </div>
-    <div class="col-3">
-      <button  class="btn btn-primary" (click)="onAddPokemon()" >Ajouter</button>
-    </div>
+<div class="container mt-4">
+
+  <div class="nav nav-tabs" role="tablist">
+    <button (click)="selectTab(i)" *ngFor="let tab of tabs; let i = index" class="nav-link" [ngClass]="{ 'active': activeTabIndex === i }" type="button" role="tab">{{ tab }}</button>
   </div>
-  
-  <app-pokemon-item *ngFor="let pokemon of pokemons;let index = index" [pokemon]="pokemon" (delete)="onDeletePokemon(index)">
-  </app-pokemon-item>
+
+  <div class="container mt-4">
+    <app-pokemon-list *ngIf="activeTabIndex === 0"></app-pokemon-list>
+    <app-login *ngIf="activeTabIndex === 1"></app-login>
+    <app-register *ngIf="activeTabIndex === 2"></app-register>
   </div>
+
+  <app-toast-container></app-toast-container>
+
+</div>

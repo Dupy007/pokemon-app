@@ -1,15 +1,17 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Pokemon } from '../../services/pokemon-service.service';
+import { Pokemon } from '../../models/pokemon';
 
 @Component({
   selector: 'app-pokemon-item',
   templateUrl: './pokemon-item.component.html',
-  styleUrl: './pokemon-item.component.css'
+  styleUrls: ['./pokemon-item.component.scss']
 })
 export class PokemonItemComponent {
-@Input() pokemon?:Pokemon;
-@Output() delete = new EventEmitter();
-onDeletePokemon(){
-  this.delete.emit();
-}
+  @Input() pokemon?: Pokemon;
+  @Input() hideDeleteButton = false;
+  @Output() onDelete = new EventEmitter();
+
+  onDeleteClick() {
+    this.onDelete.emit();
+  }
 }
