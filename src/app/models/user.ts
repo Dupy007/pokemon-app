@@ -1,6 +1,8 @@
-export interface User {
+export interface ApiUser {
   id: string;
-  name: string;
   email: string;
+}
+export interface User extends ApiUser{
+  name: string|undefined;
   password: string;
 }

@@ -6,11 +6,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  tabs = ['Pokémons',"Login","register"];
-  activeTabIndex = 0;
+  constructor(){}
 
-  selectTab(index: number) {
-    this.activeTabIndex = index;
-  }
 }
 

@@ -1,15 +1,4 @@
 <div class="container mt-4">
-
-  <div class="nav nav-tabs" role="tablist">
-    <button (click)="selectTab(i)" *ngFor="let tab of tabs; let i = index" class="nav-link" [ngClass]="{ 'active': activeTabIndex === i }" type="button" role="tab">{{ tab }}</button>
-  </div>
-
-  <div class="container mt-4">
-    <app-pokemon-list *ngIf="activeTabIndex === 0"></app-pokemon-list>
-    <app-login *ngIf="activeTabIndex === 1"></app-login>
-    <app-register *ngIf="activeTabIndex === 2"></app-register>
-  </div>
-
+  <router-outlet></router-outlet>
   <app-toast-container></app-toast-container>
-
 </div>

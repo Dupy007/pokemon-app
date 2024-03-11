@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { ApiService } from '../../services/api.service';
 import { User } from '../../models/user';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-register',
@@ -15,9 +15,12 @@ export class RegisterComponent {
     email:"",
     password:""
   };
-  constructor(private apiService:ApiService){}
+  constructor(private authService:AuthService){}
 
   createUser(){
+    if(this.user.email != "" && this.user.password != ""){
+      this.authService.SignUp(this.user.email,this.user.password);
+    }
     
   }
 }

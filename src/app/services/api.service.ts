@@ -8,14 +8,11 @@ import { Pokemon } from '../models/pokemon';
 export class ApiService {
   Api = " https://mooc-2f58d-default-rtdb.europe-west1.firebasedatabase.app/";
   constructor(private http:HttpClient) { }
-  /**
-   * postPokemom
-pokemon:Pokemon   */
   public postPokemom(pokemon:Pokemon) {
     return this.http.post<PostResponse>(this.Api+"pokemon.json",pokemon)
   }
-  public patchPokemom(pokemon:Pokemon) {
-    return this.http.put(this.Api+"pokemon.json",pokemon)
+  public deletePokemom(pokemon:Pokemon) {
+    return this.http.delete(this.Api+"pokemon/"+pokemon.id+".json")
   }
   public getPokemom() {
     return this.http.get<GetResponse>(this.Api+"pokemon.json")

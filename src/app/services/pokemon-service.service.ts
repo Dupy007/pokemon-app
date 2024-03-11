@@ -12,11 +12,7 @@ export class PokemonService {
 
   idIndex = 1;
 
-  constructor(private toastService: ToastService,private apiServive:ApiService) {
-    this.getPokemon().subscribe((pokemons:Pokemon[])=>{
-      this.pokemons=pokemons
-    });
-  }
+  constructor(private toastService: ToastService,private apiServive:ApiService) {}
   getPokemon(){
     return this.apiServive.getPokemom()
     .pipe(map((val:GetResponse)=>{
@@ -37,25 +33,12 @@ export class PokemonService {
       name,
       sex: Math.random() > 0.5 ? 'male' : 'female',
     }
-    this.apiServive.postPokemom(newpokemon).subscribe((res:PostResponse)=>{
-      this.getPokemon()
-    })
+    this.apiServive.postPokemom(newpokemon).subscribe()
     this.toastService.show('Pokémon ajouté',`Le Pokémon ${name} a été ajouté`);
   }
 
   deletePokemon(pokemon: Pokemon) {
-    const indexToDelete = this.pokemons.findIndex(currentPokemon => currentPokemon.id === pokemon.id);
-    if (indexToDelete < 0) return; // ça ne devrait pas arriver
-    this.pokemons.splice(indexToDelete, 1);
+    this.apiServive.deletePokemom(pokemon).subscribe();
     this.toastService.show('Pokémon supprimé',`Le Pokémon ${pokemon.name} a été supprimé`);
-  }
-  updatePokemon(pokemon: Pokemon) {
-    this.apiServive.patchPokemom(pokemon).subscribe((res:any)=>{
-      console.log(res);
-    });
-    // const indexToDelete = this.pokemons.findIndex(currentPokemon => currentPokemon.id === pokemon.id);
-    // if (indexToDelete < 0) return; // ça ne devrait pas arriver
-    // this.pokemons.splice(indexToDelete, 1);
-    this.toastService.show('Pokémon modifié',`Le Pokémon ${pokemon.name} a été modifié`);
   }
 }

@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Pokemon } from '../../models/pokemon';
 import { PokemonService } from '../../services/pokemon-service.service';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-pokemon-list',
@@ -9,24 +10,29 @@ import { PokemonService } from '../../services/pokemon-service.service';
 })
 export class PokemonListComponent {
   currentPokemonName = '';
-  pokemons: Pokemon[] = this.pokemonService.pokemons;
+  pokemons: Pokemon[] = [];
 
-  constructor(private pokemonService: PokemonService) {
+  constructor(private pokemonService: PokemonService,private authService:AuthService) {
     this.getPokemon();
   }
 
   onCreatePokemon() {
     this.pokemonService.addPokemon(this.currentPokemonName);
-    this.currentPokemonName = ''; // On vide l'input
+    this.currentPokemonName = ''; 
+    this.getPokemon();
   }
 
   onDeletePokemon(pokemon: Pokemon) {
     this.pokemonService.deletePokemon(pokemon);
+    this.getPokemon();
   }
   getPokemon(){
   this.pokemonService.getPokemon()
     .subscribe((pokemons:Pokemon[])=>{
       this.pokemons=pokemons
     });
+  }
+  logout(){
+    this.authService.SignOut();
   }
 }
